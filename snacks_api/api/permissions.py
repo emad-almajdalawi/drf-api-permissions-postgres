@@ -6,3 +6,9 @@ class OwnerOrReadOnly(permissions.BasePermission):
             return True
         return obj.owner == request.user  # the (owner) is from the model, name of the ForeignKey for get_user_model()
 
+class CreateOrReadOnly(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        return request.user.is_authenticated
+
