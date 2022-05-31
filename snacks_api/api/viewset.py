@@ -1,7 +1,7 @@
 from rest_framework import generics
 from snacks_api.models import Snack
 from .serializers import SnackSerializer
-from .permissions import CreateLogin, OwnerLogin, CreateLogin
+from .permissions import CreateLogin, OwnerLogin
 
 
 class SnacksListAPIView(generics.ListCreateAPIView):
