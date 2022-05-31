@@ -1,13 +1,13 @@
 from rest_framework import generics
 from snacks_api.models import Snack
 from .serializers import SnackSerializer
-from .permissions import OwnerOrReadOnly, CreateOrReadOnly
+from .permissions import CreateLogin, OwnerLogin, CreateLogin
 
 
 class SnacksListAPIView(generics.ListCreateAPIView):
     queryset = Snack.objects.all()
     serializer_class = SnackSerializer
-    permission_classes = (CreateOrReadOnly,)
+    permission_classes = (CreateLogin,)
 
     def perform_create(self, serializer):
         serializer.save(owner = self.request.user)
@@ -16,4 +16,4 @@ class SnacksListAPIView(generics.ListCreateAPIView):
 class SnacksDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Snack.objects.all()
     serializer_class = SnackSerializer
-    permission_classes = (OwnerOrReadOnly,)
+    permission_classes = (OwnerLogin,)
